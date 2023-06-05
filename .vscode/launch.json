@@ -12,9 +12,9 @@
             "servertype": "stutil",
             "device": "STM32F446RE",
             "interface": "swd",
-            "preLaunchCommands": ["make -j4"],
+            "preLaunchTask": "Build all",
             "svdFile": "",
-            "runToMain": true,
+            "runToEntryPoint": "enabled",
             "swoConfig": {
                 "enabled": true,
                 "cpuFrequency": 16000000,

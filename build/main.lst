@@ -1,0 +1,246 @@
+ARM GAS  C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.sysTick_init,"ax",%progbits
+  20              		.align	1
+  21              		.global	sysTick_init
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  26              	sysTick_init:
+  27              	.LFB134:
+  28              		.file 1 "Core/Src/main.c"
+   1:Core/Src/main.c **** #include <stdio.h>
+   2:Core/Src/main.c **** #include <stm32f446xx.h>
+   3:Core/Src/main.c **** 
+   4:Core/Src/main.c **** void sysTick_init(void);
+   5:Core/Src/main.c **** void ms_delay(int n);
+   6:Core/Src/main.c **** 
+   7:Core/Src/main.c **** int main(void) {
+   8:Core/Src/main.c ****   sysTick_init();
+   9:Core/Src/main.c ****   RCC->AHB1ENR |= 1;
+  10:Core/Src/main.c ****   GPIOA->MODER &= ~3 << (2 * 5U);
+  11:Core/Src/main.c ****   GPIOA->MODER |= 1 << (2 * 5U);
+  12:Core/Src/main.c ****   while (1) {
+  13:Core/Src/main.c ****     GPIOA->ODR |= 1 << 5U;
+  14:Core/Src/main.c ****     ms_delay(500);
+  15:Core/Src/main.c ****     GPIOA->ODR &= ~1 << 5U;
+  16:Core/Src/main.c ****     ms_delay(500);
+  17:Core/Src/main.c ****   } // end of while (1)
+  18:Core/Src/main.c **** } // end of main(void)
+  19:Core/Src/main.c **** 
+  20:Core/Src/main.c **** void sysTick_init(void) {
+  29              		.loc 1 20 25 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  21:Core/Src/main.c ****   SysTick->CTRL = 0;          // disable SysTick while configuring
+  34              		.loc 1 21 3 view .LVU1
+  35              		.loc 1 21 17 is_stmt 0 view .LVU2
+  36 0000 4FF0E023 		mov	r3, #-536813568
+  37 0004 0022     		movs	r2, #0
+ARM GAS  C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s 			page 2
+
+
+  38 0006 1A61     		str	r2, [r3, #16]
+  22:Core/Src/main.c ****   SysTick->LOAD = 0x00FFFFFF; // load max value
+  39              		.loc 1 22 3 is_stmt 1 view .LVU3
+  40              		.loc 1 22 17 is_stmt 0 view .LVU4
+  41 0008 6FF07F41 		mvn	r1, #-16777216
+  42 000c 5961     		str	r1, [r3, #20]
+  23:Core/Src/main.c ****   SysTick->VAL = 0; // clears current value register by writing anything to it
+  43              		.loc 1 23 3 is_stmt 1 view .LVU5
+  44              		.loc 1 23 16 is_stmt 0 view .LVU6
+  45 000e 9A61     		str	r2, [r3, #24]
+  24:Core/Src/main.c ****   SysTick->CTRL = 0x00000005; // enable SysTick
+  46              		.loc 1 24 3 is_stmt 1 view .LVU7
+  47              		.loc 1 24 17 is_stmt 0 view .LVU8
+  48 0010 0522     		movs	r2, #5
+  49 0012 1A61     		str	r2, [r3, #16]
+  25:Core/Src/main.c **** }
+  50              		.loc 1 25 1 view .LVU9
+  51 0014 7047     		bx	lr
+  52              		.cfi_endproc
+  53              	.LFE134:
+  55              		.section	.text.ms_delay,"ax",%progbits
+  56              		.align	1
+  57              		.global	ms_delay
+  58              		.syntax unified
+  59              		.thumb
+  60              		.thumb_func
+  62              	ms_delay:
+  63              	.LVL0:
+  64              	.LFB135:
+  26:Core/Src/main.c **** 
+  27:Core/Src/main.c **** void ms_delay(int n) {
+  65              		.loc 1 27 22 is_stmt 1 view -0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  28:Core/Src/main.c ****   SysTick->LOAD = ((n * 16000) - 1); // load ms value for 16Mhz clock
+  70              		.loc 1 28 3 view .LVU11
+  71              		.loc 1 28 23 is_stmt 0 view .LVU12
+  72 0000 4FF47A53 		mov	r3, #16000
+  73 0004 03FB00F0 		mul	r0, r3, r0
+  74              	.LVL1:
+  75              		.loc 1 28 32 view .LVU13
+  76 0008 0138     		subs	r0, r0, #1
+  77              		.loc 1 28 17 view .LVU14
+  78 000a 4FF0E023 		mov	r3, #-536813568
+  79 000e 5861     		str	r0, [r3, #20]
+  29:Core/Src/main.c ****   SysTick->VAL = 0;                  // clear current value register
+  80              		.loc 1 29 3 is_stmt 1 view .LVU15
+  81              		.loc 1 29 16 is_stmt 0 view .LVU16
+  82 0010 0022     		movs	r2, #0
+  83 0012 9A61     		str	r2, [r3, #24]
+  30:Core/Src/main.c ****   while ((SysTick->CTRL & 0x00010000) == 0)
+  84              		.loc 1 30 3 is_stmt 1 view .LVU17
+  85              	.L3:
+  31:Core/Src/main.c ****     ; // wait until COUNTFLAG is set
+  86              		.loc 1 31 5 discriminator 1 view .LVU18
+ARM GAS  C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s 			page 3
+
+
+  30:Core/Src/main.c ****   while ((SysTick->CTRL & 0x00010000) == 0)
+  87              		.loc 1 30 9 discriminator 1 view .LVU19
+  30:Core/Src/main.c ****   while ((SysTick->CTRL & 0x00010000) == 0)
+  88              		.loc 1 30 18 is_stmt 0 discriminator 1 view .LVU20
+  89 0014 4FF0E023 		mov	r3, #-536813568
+  90 0018 1B69     		ldr	r3, [r3, #16]
+  30:Core/Src/main.c ****   while ((SysTick->CTRL & 0x00010000) == 0)
+  91              		.loc 1 30 9 discriminator 1 view .LVU21
+  92 001a 13F4803F 		tst	r3, #65536
+  93 001e F9D0     		beq	.L3
+  32:Core/Src/main.c **** }...
+  94              		.loc 1 32 1 view .LVU22
+  95 0020 7047     		bx	lr
+  96              		.cfi_endproc
+  97              	.LFE135:
+  99              		.section	.text.main,"ax",%progbits
+ 100              		.align	1
+ 101              		.global	main
+ 102              		.syntax unified
+ 103              		.thumb
+ 104              		.thumb_func
+ 106              	main:
+ 107              	.LFB133:
+   7:Core/Src/main.c **** int main(void) {
+ 108              		.loc 1 7 16 is_stmt 1 view -0
+ 109              		.cfi_startproc
+ 110              		@ Volatile: function does not return.
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113 0000 08B5     		push	{r3, lr}
+ 114              	.LCFI0:
+ 115              		.cfi_def_cfa_offset 8
+ 116              		.cfi_offset 3, -8
+ 117              		.cfi_offset 14, -4
+   8:Core/Src/main.c ****   sysTick_init();
+ 118              		.loc 1 8 3 view .LVU24
+ 119 0002 FFF7FEFF 		bl	sysTick_init
+ 120              	.LVL2:
+   9:Core/Src/main.c ****   RCC->AHB1ENR |= 1;
+ 121              		.loc 1 9 3 view .LVU25
+   9:Core/Src/main.c ****   RCC->AHB1ENR |= 1;
+ 122              		.loc 1 9 16 is_stmt 0 view .LVU26
+ 123 0006 114A     		ldr	r2, .L7
+ 124 0008 136B     		ldr	r3, [r2, #48]
+ 125 000a 43F00103 		orr	r3, r3, #1
+ 126 000e 1363     		str	r3, [r2, #48]
+  10:Core/Src/main.c ****   GPIOA->MODER &= ~3 << (2 * 5U);
+ 127              		.loc 1 10 3 is_stmt 1 view .LVU27
+  10:Core/Src/main.c ****   GPIOA->MODER &= ~3 << (2 * 5U);
+ 128              		.loc 1 10 16 is_stmt 0 view .LVU28
+ 129 0010 A2F56052 		sub	r2, r2, #14336
+ 130 0014 1368     		ldr	r3, [r2]
+ 131 0016 23F47F63 		bic	r3, r3, #4080
+ 132 001a 23F00F03 		bic	r3, r3, #15
+ 133 001e 1360     		str	r3, [r2]
+  11:Core/Src/main.c ****   GPIOA->MODER |= 1 << (2 * 5U);
+ 134              		.loc 1 11 3 is_stmt 1 view .LVU29
+ARM GAS  C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s 			page 4
+
+
+  11:Core/Src/main.c ****   GPIOA->MODER |= 1 << (2 * 5U);
+ 135              		.loc 1 11 16 is_stmt 0 view .LVU30
+ 136 0020 1368     		ldr	r3, [r2]
+ 137 0022 43F48063 		orr	r3, r3, #1024
+ 138 0026 1360     		str	r3, [r2]
+ 139              	.L5:
+  12:Core/Src/main.c ****   while (1) {
+ 140              		.loc 1 12 3 is_stmt 1 discriminator 1 view .LVU31
+  13:Core/Src/main.c ****     GPIOA->ODR |= 1 << 5U;
+ 141              		.loc 1 13 5 discriminator 1 view .LVU32
+  13:Core/Src/main.c ****     GPIOA->ODR |= 1 << 5U;
+ 142              		.loc 1 13 16 is_stmt 0 discriminator 1 view .LVU33
+ 143 0028 094C     		ldr	r4, .L7+4
+ 144 002a 6369     		ldr	r3, [r4, #20]
+ 145 002c 43F02003 		orr	r3, r3, #32
+ 146 0030 6361     		str	r3, [r4, #20]
+  14:Core/Src/main.c ****     ms_delay(500);
+ 147              		.loc 1 14 5 is_stmt 1 discriminator 1 view .LVU34
+ 148 0032 4FF4FA70 		mov	r0, #500
+ 149 0036 FFF7FEFF 		bl	ms_delay
+ 150              	.LVL3:
+  15:Core/Src/main.c ****     GPIOA->ODR &= ~1 << 5U;
+ 151              		.loc 1 15 5 discriminator 1 view .LVU35
+  15:Core/Src/main.c ****     GPIOA->ODR &= ~1 << 5U;
+ 152              		.loc 1 15 16 is_stmt 0 discriminator 1 view .LVU36
+ 153 003a 6369     		ldr	r3, [r4, #20]
+ 154 003c 23F03F03 		bic	r3, r3, #63
+ 155 0040 6361     		str	r3, [r4, #20]
+  16:Core/Src/main.c ****     ms_delay(500);
+ 156              		.loc 1 16 5 is_stmt 1 discriminator 1 view .LVU37
+ 157 0042 4FF4FA70 		mov	r0, #500
+ 158 0046 FFF7FEFF 		bl	ms_delay
+ 159              	.LVL4:
+  12:Core/Src/main.c ****   while (1) {
+ 160              		.loc 1 12 9 discriminator 1 view .LVU38
+ 161 004a EDE7     		b	.L5
+ 162              	.L8:
+ 163              		.align	2
+ 164              	.L7:
+ 165 004c 00380240 		.word	1073887232
+ 166 0050 00000240 		.word	1073872896
+ 167              		.cfi_endproc
+ 168              	.LFE133:
+ 170              		.text
+ 171              	.Letext0:
+ 172              		.file 2 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 173              		.file 3 "c:\\program files (x86)\\gnu arm embedded toolchain\\10 2021.10\\arm-none-eabi\\include\\
+ 174              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 175              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ARM GAS  C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:20     .text.sysTick_init:00000000 $t
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:26     .text.sysTick_init:00000000 sysTick_init
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:56     .text.ms_delay:00000000 $t
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:62     .text.ms_delay:00000000 ms_delay
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:100    .text.main:00000000 $t
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:106    .text.main:00000000 main
+C:\Users\jakec\AppData\Local\Temp\ccKN8LMu.s:165    .text.main:0000004c $d
+
+NO UNDEFINED SYMBOLS
