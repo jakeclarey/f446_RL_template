@@ -15,6 +15,7 @@
             "preLaunchTask": "Build all",
             "svdFile": "",
             "runToEntryPoint": "enabled",
+            "svdPath": "C:/Program Files/STM32SVD/STM32F446.svd",
             "swoConfig": {
                 "enabled": true,
                 "cpuFrequency": 16000000,
