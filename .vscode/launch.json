@@ -1,0 +1,35 @@
+// Configure debug launch settings
+{
+    "version": "0.2.0",
+    "projectName": "${workspaceFolderBasename}",
+    "configurations": [
+        {
+            "name": "STLink debug",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/${workspaceFolderBasename}.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "stutil",
+            "device": "STM32F446RE",
+            "interface": "swd",
+            "preLaunchCommands": ["make -j4"],
+            "svdFile": "",
+            "runToMain": true,
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 16000000,
+                "swoFrequency": 4000000,
+                "source":"probe",
+                "decoders": [
+                    {
+                        "label": "ITM port 0 output",
+                        "type": "console",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "ascii"
+                    }
+                ]
+            }
+        }
+    ]
+}

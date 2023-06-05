@@ -11,9 +11,9 @@ int main(void) {
   GPIOA->MODER |= 1 << (2 * 5U);
   while (1) {
     GPIOA->ODR |= 1 << 5U;
-    ms_delay(1000);
+    ms_delay(500);
     GPIOA->ODR &= ~1 << 5U;
-    ms_delay(1000);
+    ms_delay(500);
   } // end of while (1)
 } // end of main(void)
 

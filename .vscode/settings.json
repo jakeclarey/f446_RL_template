@@ -6,5 +6,8 @@
         "cmsis_version.h": "c",
         "mpu_armv7.h": "c",
         "cmsis_compiler.h": "c"
-    }
+    },
+    "cortex-debug.gdbPath": "C:/Program Files (x86)/GNU Arm Embedded Toolchain/10 2021.10/bin/arm-none-eabi-gdb",
+    "cortex-debug.stutilPath": "C:/Program Files (x86)/STLink Toolchain/bin/st-util",
+    "cortex-debug.armToolchainPath": "C:/Program Files (x86)/STLink Toolchain/bin"
 }
