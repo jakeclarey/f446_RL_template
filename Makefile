@@ -37,7 +37,8 @@ BUILD_DIR = build
 # C sources
 C_SOURCES =  \
 Core/Src/main.c \
-Core/Src/system_stm32f4xx.c  
+Core/Src/system_stm32f4xx.c \
+Core/Src/blink.c 
 
 # ASM sources
 ASM_SOURCES =  \
