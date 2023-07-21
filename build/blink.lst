@@ -1,0 +1,203 @@
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"blink.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/blink.c"
+  20              		.section	.text.sysTick_init,"ax",%progbits
+  21              		.align	1
+  22              		.global	sysTick_init
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	sysTick_init:
+  28              	.LFB131:
+   1:Core/Src/blink.c **** #include "blink.h"
+   2:Core/Src/blink.c **** 
+   3:Core/Src/blink.c **** void doBlink(void) {
+   4:Core/Src/blink.c ****   GPIOA->ODR |= 1 << 5U;
+   5:Core/Src/blink.c ****   ms_delay(200);
+   6:Core/Src/blink.c ****   GPIOA->ODR &= ~1 << 5U;
+   7:Core/Src/blink.c ****   ms_delay(200);
+   8:Core/Src/blink.c **** }
+   9:Core/Src/blink.c **** 
+  10:Core/Src/blink.c **** void sysTick_init(void) {
+  29              		.loc 1 10 25 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  11:Core/Src/blink.c ****   SysTick->CTRL = 0;          // disable SysTick while configuring
+  34              		.loc 1 11 3 view .LVU1
+  35              		.loc 1 11 17 is_stmt 0 view .LVU2
+  36 0000 4FF0E023 		mov	r3, #-536813568
+  37 0004 0022     		movs	r2, #0
+  38 0006 1A61     		str	r2, [r3, #16]
+  12:Core/Src/blink.c ****   SysTick->LOAD = 0x00FFFFFF; // load max value
+  39              		.loc 1 12 3 is_stmt 1 view .LVU3
+  40              		.loc 1 12 17 is_stmt 0 view .LVU4
+  41 0008 6FF07F41 		mvn	r1, #-16777216
+  42 000c 5961     		str	r1, [r3, #20]
+  13:Core/Src/blink.c ****   SysTick->VAL = 0; // clears current value register by writing anything to it
+  43              		.loc 1 13 3 is_stmt 1 view .LVU5
+  44              		.loc 1 13 16 is_stmt 0 view .LVU6
+  45 000e 9A61     		str	r2, [r3, #24]
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s 			page 2
+
+
+  14:Core/Src/blink.c ****   SysTick->CTRL = 0x00000005; // enable SysTick
+  46              		.loc 1 14 3 is_stmt 1 view .LVU7
+  47              		.loc 1 14 17 is_stmt 0 view .LVU8
+  48 0010 0522     		movs	r2, #5
+  49 0012 1A61     		str	r2, [r3, #16]
+  15:Core/Src/blink.c **** }
+  50              		.loc 1 15 1 view .LVU9
+  51 0014 7047     		bx	lr
+  52              		.cfi_endproc
+  53              	.LFE131:
+  55              		.section	.text.ms_delay,"ax",%progbits
+  56              		.align	1
+  57              		.global	ms_delay
+  58              		.syntax unified
+  59              		.thumb
+  60              		.thumb_func
+  62              	ms_delay:
+  63              	.LVL0:
+  64              	.LFB132:
+  16:Core/Src/blink.c **** 
+  17:Core/Src/blink.c **** void ms_delay(int n) {
+  65              		.loc 1 17 22 is_stmt 1 view -0
+  66              		.cfi_startproc
+  67              		@ args = 0, pretend = 0, frame = 0
+  68              		@ frame_needed = 0, uses_anonymous_args = 0
+  69              		@ link register save eliminated.
+  18:Core/Src/blink.c ****   SysTick->LOAD = ((n * 16000) - 1); // load ms value for 16Mhz clock
+  70              		.loc 1 18 3 view .LVU11
+  71              		.loc 1 18 23 is_stmt 0 view .LVU12
+  72 0000 4FF47A53 		mov	r3, #16000
+  73 0004 03FB00F0 		mul	r0, r3, r0
+  74              	.LVL1:
+  75              		.loc 1 18 32 view .LVU13
+  76 0008 0138     		subs	r0, r0, #1
+  77              		.loc 1 18 17 view .LVU14
+  78 000a 4FF0E023 		mov	r3, #-536813568
+  79 000e 5861     		str	r0, [r3, #20]
+  19:Core/Src/blink.c ****   SysTick->VAL = 0;                  // clear current value register
+  80              		.loc 1 19 3 is_stmt 1 view .LVU15
+  81              		.loc 1 19 16 is_stmt 0 view .LVU16
+  82 0010 0022     		movs	r2, #0
+  83 0012 9A61     		str	r2, [r3, #24]
+  20:Core/Src/blink.c ****   while ((SysTick->CTRL & 0x00010000) == 0)
+  84              		.loc 1 20 3 is_stmt 1 view .LVU17
+  85              	.L3:
+  86              		.loc 1 20 39 discriminator 1 view .LVU18
+  87              		.loc 1 20 18 is_stmt 0 discriminator 1 view .LVU19
+  88 0014 4FF0E023 		mov	r3, #-536813568
+  89 0018 1B69     		ldr	r3, [r3, #16]
+  90              		.loc 1 20 39 discriminator 1 view .LVU20
+  91 001a 13F4803F 		tst	r3, #65536
+  92 001e F9D0     		beq	.L3
+  21:Core/Src/blink.c ****     ; // wait until COUNTFLAG is set
+  22:Core/Src/blink.c **** }
+  93              		.loc 1 22 1 view .LVU21
+  94 0020 7047     		bx	lr
+  95              		.cfi_endproc
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s 			page 3
+
+
+  96              	.LFE132:
+  98              		.section	.text.doBlink,"ax",%progbits
+  99              		.align	1
+ 100              		.global	doBlink
+ 101              		.syntax unified
+ 102              		.thumb
+ 103              		.thumb_func
+ 105              	doBlink:
+ 106              	.LFB130:
+   3:Core/Src/blink.c ****   GPIOA->ODR &= ~1 << 5U;
+ 107              		.loc 1 3 20 is_stmt 1 view -0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 10B5     		push	{r4, lr}
+ 112              	.LCFI0:
+ 113              		.cfi_def_cfa_offset 8
+ 114              		.cfi_offset 4, -8
+ 115              		.cfi_offset 14, -4
+   4:Core/Src/blink.c ****   ms_delay(200);
+ 116              		.loc 1 4 3 view .LVU23
+   4:Core/Src/blink.c ****   ms_delay(200);
+ 117              		.loc 1 4 8 is_stmt 0 view .LVU24
+ 118 0002 084C     		ldr	r4, .L6
+ 119 0004 6369     		ldr	r3, [r4, #20]
+   4:Core/Src/blink.c ****   ms_delay(200);
+ 120              		.loc 1 4 14 view .LVU25
+ 121 0006 43F02003 		orr	r3, r3, #32
+ 122 000a 6361     		str	r3, [r4, #20]
+   5:Core/Src/blink.c ****   GPIOA->ODR &= ~1 << 5U;
+ 123              		.loc 1 5 3 is_stmt 1 view .LVU26
+ 124 000c C820     		movs	r0, #200
+ 125 000e FFF7FEFF 		bl	ms_delay
+ 126              	.LVL2:
+   6:Core/Src/blink.c ****   ms_delay(200);
+ 127              		.loc 1 6 3 view .LVU27
+   6:Core/Src/blink.c ****   ms_delay(200);
+ 128              		.loc 1 6 8 is_stmt 0 view .LVU28
+ 129 0012 6369     		ldr	r3, [r4, #20]
+   6:Core/Src/blink.c ****   ms_delay(200);
+ 130              		.loc 1 6 14 view .LVU29
+ 131 0014 23F03F03 		bic	r3, r3, #63
+ 132 0018 6361     		str	r3, [r4, #20]
+   7:Core/Src/blink.c **** }
+ 133              		.loc 1 7 3 is_stmt 1 view .LVU30
+ 134 001a C820     		movs	r0, #200
+ 135 001c FFF7FEFF 		bl	ms_delay
+ 136              	.LVL3:
+   8:Core/Src/blink.c **** 
+ 137              		.loc 1 8 1 is_stmt 0 view .LVU31
+ 138 0020 10BD     		pop	{r4, pc}
+ 139              	.L7:
+ 140 0022 00BF     		.align	2
+ 141              	.L6:
+ 142 0024 00000240 		.word	1073872896
+ 143              		.cfi_endproc
+ 144              	.LFE130:
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s 			page 4
+
+
+ 146              		.text
+ 147              	.Letext0:
+ 148              		.file 2 "/Applications/ArmGNUToolchain/12.2.mpacbti-rel1/arm-none-eabi/arm-none-eabi/include/machi
+ 149              		.file 3 "/Applications/ArmGNUToolchain/12.2.mpacbti-rel1/arm-none-eabi/arm-none-eabi/include/sys/_
+ 150              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 151              		.file 5 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 blink.c
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:21     .text.sysTick_init:00000000 $t
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:27     .text.sysTick_init:00000000 sysTick_init
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:56     .text.ms_delay:00000000 $t
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:62     .text.ms_delay:00000000 ms_delay
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:99     .text.doBlink:00000000 $t
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:105    .text.doBlink:00000000 doBlink
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccOodagK.s:142    .text.doBlink:00000024 $d
+
+NO UNDEFINED SYMBOLS

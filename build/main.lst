@@ -1,0 +1,110 @@
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.file 1 "Core/Src/main.c"
+  20              		.section	.text.main,"ax",%progbits
+  21              		.align	1
+  22              		.global	main
+  23              		.syntax unified
+  24              		.thumb
+  25              		.thumb_func
+  27              	main:
+  28              	.LFB133:
+   1:Core/Src/main.c **** #include "blink.h"
+   2:Core/Src/main.c **** #include <stdio.h>
+   3:Core/Src/main.c **** #include <stm32f446xx.h>
+   4:Core/Src/main.c **** 
+   5:Core/Src/main.c **** int main(void) {
+  29              		.loc 1 5 16 view -0
+  30              		.cfi_startproc
+  31              		@ Volatile: function does not return.
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34 0000 08B5     		push	{r3, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 8
+  37              		.cfi_offset 3, -8
+  38              		.cfi_offset 14, -4
+   6:Core/Src/main.c ****   sysTick_init();
+  39              		.loc 1 6 3 view .LVU1
+  40 0002 FFF7FEFF 		bl	sysTick_init
+  41              	.LVL0:
+   7:Core/Src/main.c ****   RCC->AHB1ENR |= 1;
+  42              		.loc 1 7 3 view .LVU2
+  43              		.loc 1 7 6 is_stmt 0 view .LVU3
+  44 0006 0A4A     		ldr	r2, .L4
+  45 0008 136B     		ldr	r3, [r2, #48]
+  46              		.loc 1 7 16 view .LVU4
+  47 000a 43F00103 		orr	r3, r3, #1
+  48 000e 1363     		str	r3, [r2, #48]
+   8:Core/Src/main.c ****   GPIOA->MODER &= ~3 << (2 * 5U);
+  49              		.loc 1 8 3 is_stmt 1 view .LVU5
+  50              		.loc 1 8 8 is_stmt 0 view .LVU6
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s 			page 2
+
+
+  51 0010 A2F56052 		sub	r2, r2, #14336
+  52 0014 1368     		ldr	r3, [r2]
+  53              		.loc 1 8 16 view .LVU7
+  54 0016 23F47F63 		bic	r3, r3, #4080
+  55 001a 23F00F03 		bic	r3, r3, #15
+  56 001e 1360     		str	r3, [r2]
+   9:Core/Src/main.c ****   GPIOA->MODER |= 1 << (2 * 5U);
+  57              		.loc 1 9 3 is_stmt 1 view .LVU8
+  58              		.loc 1 9 8 is_stmt 0 view .LVU9
+  59 0020 1368     		ldr	r3, [r2]
+  60              		.loc 1 9 16 view .LVU10
+  61 0022 43F48063 		orr	r3, r3, #1024
+  62 0026 1360     		str	r3, [r2]
+  63              	.L2:
+  10:Core/Src/main.c ****   while (1) {
+  64              		.loc 1 10 3 is_stmt 1 discriminator 1 view .LVU11
+  11:Core/Src/main.c ****     doBlink();
+  65              		.loc 1 11 5 discriminator 1 view .LVU12
+  66 0028 FFF7FEFF 		bl	doBlink
+  67              	.LVL1:
+  10:Core/Src/main.c ****   while (1) {
+  68              		.loc 1 10 9 discriminator 1 view .LVU13
+  69 002c FCE7     		b	.L2
+  70              	.L5:
+  71 002e 00BF     		.align	2
+  72              	.L4:
+  73 0030 00380240 		.word	1073887232
+  74              		.cfi_endproc
+  75              	.LFE133:
+  77              		.text
+  78              	.Letext0:
+  79              		.file 2 "/Applications/ArmGNUToolchain/12.2.mpacbti-rel1/arm-none-eabi/arm-none-eabi/include/machi
+  80              		.file 3 "/Applications/ArmGNUToolchain/12.2.mpacbti-rel1/arm-none-eabi/arm-none-eabi/include/sys/_
+  81              		.file 4 "Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f446xx.h"
+  82              		.file 5 "Core/Inc/blink.h"
+ARM GAS  /var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s:21     .text.main:00000000 $t
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s:27     .text.main:00000000 main
+/var/folders/q7/ryz901f13t9bnbp0tlpxn27c0000gn/T//ccmDhLvy.s:73     .text.main:00000030 $d
+
+UNDEFINED SYMBOLS
+sysTick_init
+doBlink
