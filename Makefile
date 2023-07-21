@@ -3,7 +3,7 @@
 ##########################################################################################################################
 
 # title of the project folder
-TARGET = f446_RL_template
+TARGET = $(shell basename $(CURDIR))
 
 DEBUG = 1
 OPT = -Og # preferred optimization for edit->compile->debug
