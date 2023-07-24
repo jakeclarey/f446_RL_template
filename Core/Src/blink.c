@@ -2,9 +2,9 @@
 
 void doBlink(void) {
   GPIOA->ODR |= 1 << 5U;
-  ms_delay(200);
+  ms_delay(1000);
   GPIOA->ODR &= ~1 << 5U;
-  ms_delay(200);
+  ms_delay(1000);
 }
 
 void sysTick_init(void) {

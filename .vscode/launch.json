@@ -13,9 +13,13 @@
             "device": "STM32F446RE",
             "interface": "swd",
             "preLaunchTask": "Build all",
-            "svdFile": "C:/Program Files/STM32SVDS/STM32F446.svd",
+            "svdFile": "/Volumes/BOOTCAMP/Program Files/STM32SVDS/STM32F446.svd",
             "runToEntryPoint": "enabled",
-            "swoConfig": {
+            /*"liveWatch": {
+                "enabled": true,
+                "samplesPerSecond": 4
+            },*/
+            /*"swoConfig": {
                 "enabled": true,
                 "cpuFrequency": 16000000,
                 "swoFrequency": 4000000,
@@ -29,7 +33,7 @@
                         "encoding": "ascii"
                     }
                 ]
-            }
+            }*/
         }
     ]
 }
